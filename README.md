@@ -1,6 +1,6 @@
 # RippyRules
 
-TODO: Write a gem description
+A Ruby wrapper for the What.cd JSON API
 
 ## Installation
 
@@ -18,9 +18,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Initialize a client like so:
+
+```ruby
+client = RippyRules::Client.new(your_whatcd_username, your_whatcd_password)
+```
+You can then run any command in the API by calling it's corresponding method. Each method will return a hash
+
+## API Documentation
+The documentation for the API methods can be found in the What.cd wiki
+
+## Examples
+
+Searching for an artist
+```ruby
+client = RippyRules::Client.new(your_whatcd_username, your_whatcd_password)
+results = client.browse({searchstr: 'Bruce Springsteen'})
+```
 
 ## Contributing
+
+To contribute to RippyRules, you must have a What.cd account. I do not have one and I do not know how to acquire one.
+If you don't have an account, the specs will not run
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
