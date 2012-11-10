@@ -1,5 +1,7 @@
 # RippyRules
 
+<a href="https://codeclimate.com/github/MrCheese/rippy_rules"><img src="https://codeclimate.com/badge.png" /></a>
+
 A Ruby wrapper for the What.cd JSON API
 
 ## Installation
