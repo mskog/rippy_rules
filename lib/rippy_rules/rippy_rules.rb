@@ -11,22 +11,32 @@ module RippyRules
       authenticate
     end
 
+    def search(str)
+      browse({searchstr: str})
+    end
+
     def method_missing(method, *params)
-      raise APIError unless params.first.is_a?(Hash)
-      perform_request(method.to_s,params.first)
+      first_param = params.first
+      raise APIError unless first_param.is_a?(Hash)
+      perform_request(method.to_s,first_param)
     end
 
     def perform_request(method, query={})
-      self.class.get("/ajax.php?action=#{method}", :query => query)
+      self.class.get("/ajax.php", :query => query.merge({action: method}))
     end
 
     private
 
     def authenticate
-      body = {:username => @username, :password => @password, :keeplogged => 1}
+      body = {username: @username, password: @password, keeplogged: 1}
+      response = login(body)
+      cookies(response.headers['set-cookie'])
+    end
+
+    def login(body)
       response = self.class.post('/login.php', :body => body, :follow_redirects => false)
       raise AuthenticationError if response.headers['set-cookie'].nil?
-      cookies(response.headers['set-cookie'])
+      response
     end
 
     def cookies(cookie)
@@ -34,6 +44,7 @@ module RippyRules
       cookie_jar.add_cookies cookie
       self.class.cookies cookie_jar
     end
+
   end
   class AuthenticationError < StandardError; end
   class APIError < StandardError; end
