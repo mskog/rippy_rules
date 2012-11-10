@@ -1,6 +1,6 @@
-# RippyRules
-
 <a href="https://codeclimate.com/github/MrCheese/rippy_rules"><img src="https://codeclimate.com/badge.png" /></a>
+
+# RippyRules
 
 A Ruby wrapper for the What.cd JSON API
 
@@ -36,6 +36,13 @@ Searching for an artist
 ```ruby
 client = RippyRules::Client.new(your_whatcd_username, your_whatcd_password)
 results = client.browse({searchstr: 'Bruce Springsteen'})
+```
+
+There is also a search method that can be used for simpler searches where you only care about getting results.
+It is equivalent to calling browse with a searchstr
+```ruby
+client = RippyRules::Client.new(your_whatcd_username, your_whatcd_password)
+results = client.search 'Bruce Springsteen'
 ```
 
 ## Contributing
